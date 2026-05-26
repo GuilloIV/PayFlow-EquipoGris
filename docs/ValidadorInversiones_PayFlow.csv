@@ -1,0 +1,22 @@
+﻿,PRA05- Inversiones- PayFlow,,Análisis para tabla de decisión,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,ESCENARIOS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,CONDICIONES-ACCIONES / ESCENARIOS,E1,E2,E3,E4,E5,E6,E7,E8,,,,,E9,E10,E11,E12,E13,E14,E15,E16,E17,E18,E19,E20,,,,,E21,E22,E23,E24
+,CONDICIONES,Capital superior al saldo con error de captura y cuenta nueva,Capital superior al saldo  y cuenta nueva,Capital superior al saldo con error de captura ,Capital superior al saldo,"Riesgo alto y cuenta nueva, con error de captura",Riesgo alto y cuenta nueva,Error de captura,Inversión riesgosa,IMPOSIBLE,IMPOSIBLE,IMPOSIBLE,IMPOSIBLE,,,,,,,,,,,,,IMPOSIBLE,IMPOSIBLE,IMPOSIBLE,IMPOSIBLE,,,,
+C1,Perfil de la inversión = Alto,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F
+C2,Capital (P) >= 50% del Saldo,V,V,V,V,V,V,V,V,F,F,F,F,F,F,F,F,V,V,V,V,V,V,V,V,F,F,F,F,F,F,F,F
+C3,Capital > Saldo,V,V,V,V,F,F,F,F,V,V,V,V,F,F,F,F,V,V,V,V,F,F,F,F,V,V,V,V,F,F,F,F
+C4,Antigüedad Cta. < 3 meses,V,V,F,F,V,V,F,F,V,V,F,F,V,V,F,F,V,V,F,F,V,V,F,F,V,V,F,F,V,V,F,F
+C5,Plazo (n) < 1 OR Capital (P) <= 0,V,F,V,F,V,F,V,F,V,F,V,F,V,F,V,F,V,F,V,F,V,F,V,F,V,F,V,F,V,F,V,F
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,ACCIONES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Tasa por riesgo anual (5% / 12%),12%,12%,12%,12%,12%,12%,12%,12%,,,,,,,,,,,,,,,,,,,,,,,,
+,"Integración Folio APROBACIÓN <PERFIL><ESTADO><MONTO_FINAL_REDONDEADO>- Aprobado/completo, Rechazado/None",None,None,None,None,None,None,None,AR[Round(A=P(1+r)n))],,,,,,,,,,,,,,,,,,,,,,,,
+,"<PERFIL> (A-Alto riesgo, B-Bajo riesgo)",N/A,N/A,N/A,N/A,N/A,N/A,N/A,A,,,,,,,,,,,,,,,,,,,,,,,,
+,"<ESTADO> (E-Estable, R-Riesgosa)",N/A,N/A,N/A,N/A,N/A,N/A,N/A,R,,,,,,,,,,,,,,,,,,,,,,,,
+,<MONTO_FINAL_REDONDEADO> [A=P(1+r)n],N/A,N/A,N/A,N/A,N/A,N/A,N/A,A=P(1+r)n,,,,,,,,,,,,,,,,,,,,,,,,
+,NUEVO ESTADO (Autorizado[INVERSIÓN_RIESGOSA O INVERSIÓN_ESTABLE]/Rechazado),RECHAZADA,RECHAZADA,RECHAZADA,RECHAZADA,RECHAZADA,RECHAZADA,RECHAZADA,INVERSIÓN_RIESGOSA,,,,,,,,,,,,,,,,,,,,,,,,
+,Mensajes (Errores/Notificación),"""Rechazada por exceder el saldo disponible""","""Rechazada por exceder el saldo disponible""","""Rechazada por exceder el saldo disponible""","""Rechazada por exceder el saldo disponible""","""Rechazada por ser cuenta nueva""","""Rechazada por ser cuenta nueva""","""Error de captura""",,,,,,,,,,,,,,,,,,,,,,,,,
+,,"""Error de captura""","""Rechazada por ser cuenta nueva""","""Error de captura""",,"""Error de captura""",,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,"""Rechazada por ser cuenta nueva""",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
