@@ -150,7 +150,8 @@ def flujo_pago():
         comision_aplicada = saldo - resultado["nuevo_saldo"] - monto
         print(f"  {'Comision':<20} ${comision_aplicada:,.2f}")
         print(f"  {'Saldo anterior':<20} ${saldo:,.2f}")
-        print(f"  {'Saldo nuevo':<20} {clr(f'${resultado[\"nuevo_saldo\"]:,.2f}', C.GREEN)}")
+        saldo_nuevo_fmt = clr(f'${resultado["nuevo_saldo"]:,.2f}', C.GREEN)
+        print(f"  {'Saldo nuevo':<20} {saldo_nuevo_fmt}")
         print(f"  {'Folio':<20} {clr(resultado['folio'], C.CYAN)}")
     else:
         print(clr("  ✗ PAGO RECHAZADO", C.BOLD + C.RED))
@@ -207,7 +208,8 @@ def flujo_inversion():
         print(f"  {'Capital invertido':<25} ${capital:,.2f}")
         print(f"  {'Perfil':<25} {perfil}  {clr(f'(tasa {tasa*100:.0f}%)', C.GRAY)}")
         print(f"  {'Plazo':<25} {plazo} meses")
-        print(f"  {'Monto final':<25} {clr(f'${resultado[\"monto_final\"]:,.2f}', C.GREEN)}")
+        monto_fmt = clr(f'${resultado["monto_final"]:,.2f}', C.GREEN)
+        print(f"  {'Monto final':<25} {monto_fmt}")
         print(f"  {'Rendimiento estimado':<25} {clr(f'+${rendimiento:,.2f}', C.GREEN)}")
         print(f"  {'Estado de cuenta':<25} {clr(resultado['nuevo_estado'], C.YELLOW)}")
         print(f"  {'Folio de aprobacion':<25} {clr(resultado['folio_aprobacion'], C.CYAN)}")
