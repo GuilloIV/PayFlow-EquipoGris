@@ -5,7 +5,7 @@
 
 Repositorio unificado del MVP de PayFlow. Implementado con arquitectura
 Sandwich Testing (TDD por capas) cubriendo el modulo de inversiones (R1-R9)
-y el modulo de pagos de servicios fijos.
+y el modulo de pagos de servicios fijos, con interfaz de consola interactiva.
 
 ---
 
@@ -23,18 +23,19 @@ y el modulo de pagos de servicios fijos.
 
 ```
 PayFlow-EquipoGris/
+├── main.py                   # MVP consola interactivo — punto de entrada
 ├── src/
 │   ├── __init__.py
-│   ├── inversiones.py        # Modulo de inversiones — R1 a R9 (PRY01/PRA05/TAR04)
+│   ├── inversiones.py        # Modulo de inversiones R1-R9 (PRY01/PRA05/TAR04)
 │   └── payflow_pago.py       # Modulo de pagos fijos (PRA08/PRA10)
 ├── tests/
 │   ├── __init__.py
 │   ├── test_inversiones.py   # 48 tests — cobertura 100%
 │   └── test_pago_e2e.py      # 31 tests — cobertura 100%
 ├── docs/
-│   ├── PRA08-EquipoGris.pdf
-│   ├── PRA10-EquipoGris.pdf
-│   ├── TAR04-EquipoGris.pdf
+│   ├── PRA08-EquipoGris.pdf  # Pruebas E2E al MVP
+│   ├── PRA10-EquipoGris.pdf  # Pruebas de regresion
+│   ├── TAR04-EquipoGris.pdf  # Integracion final
 │   └── ValidadorInversiones_PayFlow.csv
 ├── .gitignore
 ├── pytest.ini
@@ -62,7 +63,7 @@ git --version
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/TU_USUARIO/PayFlow-EquipoGris.git
+git clone https://github.com/GuilloIV/PayFlow-EquipoGris.git
 cd PayFlow-EquipoGris
 
 # 2. Crear entorno virtual
@@ -73,6 +74,10 @@ source .venv/bin/activate
 
 # 4. Instalar dependencias
 pip install -r requirements.txt
+
+# 5. Verificar
+pytest --version
+radon --version
 ```
 
 ### Windows
@@ -82,6 +87,34 @@ python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
 ```
+
+---
+
+## Ejecutar el MVP (consola interactiva)
+
+```bash
+source .venv/bin/activate   # si no esta activo
+python3 main.py
+```
+
+El menu principal ofrece dos modulos:
+
+```
+MENU PRINCIPAL
+  1.  Pago de Servicio Fijo    (Renta / Internet / Luz)
+  2.  Inversion de Capital     (Bajo riesgo / Alto riesgo)
+  3.  Salir
+```
+
+### Modulo 1 — Pago de Servicio Fijo
+Ingresa concepto, monto y saldo. El sistema valida disponibilidad,
+aplica la comision correspondiente (Internet: $0, Renta/Luz: $15)
+y emite el folio de transaccion.
+
+### Modulo 2 — Inversion de Capital
+Ingresa capital, saldo, antiguedad de cuenta, perfil de riesgo y plazo.
+El sistema calcula el rendimiento con interes compuesto A = P*(1+r)^n,
+determina el estado de cuenta y genera el folio de aprobacion.
 
 ---
 
@@ -100,9 +133,8 @@ pytest tests/test_pago_e2e.py
 # Con cobertura en terminal
 pytest --cov=inversiones --cov=payflow_pago --cov-report=term-missing tests/
 
-# Con reporte HTML
+# Con reporte HTML (abre htmlcov/index.html)
 pytest --cov=inversiones --cov=payflow_pago --cov-report=html tests/
-open htmlcov/index.html
 ```
 
 ---
@@ -113,7 +145,13 @@ open htmlcov/index.html
 radon cc src/inversiones.py src/payflow_pago.py -s
 ```
 
-Todas las funciones deben mostrar calificacion **A** (complejidad 1-5).
+Todas las funciones muestran calificacion **A** (complejidad 1-5).
+
+Para el indice de mantenibilidad:
+
+```bash
+radon mi src/inversiones.py src/payflow_pago.py
+```
 
 ---
 
