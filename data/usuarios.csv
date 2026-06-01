@@ -1,0 +1,4 @@
+id_usuario,password,nombre,saldo,meses_cuenta,estado_cuenta
+USR-001,payflow123,Jorge Cobos,10000.00,12,DISPONIBLE
+USR-002,gris2026,Marcos Sanchez,1000.00,2,DISPONIBLE
+USR-003,taller99,Guillermo Velazquez,25000.00,24,DISPONIBLE
